@@ -1,0 +1,203 @@
+[
+  {
+    "id": 1,
+    "img": "https://www.mobiledokan.com/media/apple-iphone-12-pro-graphite-official-image.webp",
+    "yearsOfUse": 2,
+    "sellerName": "John Doe",
+    "details": "iPhone 12, 64GB, Black, excellent condition.",
+    "location": "New York, USA",
+    "originalPrice": 800,
+    "resellPrice": 600
+  },
+
+  {
+    "id": 2,
+    "img": "https://www.mobiledokan.com/media/samsung-galaxy-s21-ultra-phantom-black-official-image.webp",
+    "yearsOfUse": 1,
+    "sellerName": "Jane Smith",
+    "details": "Samsung Galaxy S21, 128GB, Phantom Gray, minor scratches.",
+    "location": "Los Angeles, USA",
+    "originalPrice": 1000,
+    "resellPrice": 750
+  },
+  {
+    "id": 3,
+    "img": "https://www.mobiledokan.com/media/oneplus-8t-aquamarine-green-official-image.webp",
+    "yearsOfUse": 3,
+    "sellerName": "Mike Johnson",
+    "details": "OnePlus 8T, 256GB, Aquamarine Green, great condition.",
+    "location": "Chicago, USA",
+    "originalPrice": 700,
+    "resellPrice": 450
+  },
+  {
+    "id": 4,
+    "img": "https://www.mobiledokan.com/media/1711549617mJCWW.webp",
+    "yearsOfUse": 1,
+    "sellerName": "Emma Brown",
+    "details": "Google Pixel 6, 128GB, Stormy Black, like new.",
+    "location": "Houston, USA",
+    "originalPrice": 900,
+    "resellPrice": 800
+  },
+  {
+    "id": 5,
+    "img": "https://www.mobiledokan.com/media/xiaomi-redmi-10-sea-blue-official-image.webp",
+    "yearsOfUse": 4,
+    "sellerName": "Liam Davis",
+    "details": "Xiaomi Mi 10, 256GB, Coral Green, battery slightly degraded.",
+    "location": "Phoenix, USA",
+    "originalPrice": 600,
+    "resellPrice": 300
+  },
+  {
+    "id": 6,
+    "img": "https://www.mobiledokan.com/media/realme-x7-pro.webp",
+    "yearsOfUse": 2,
+    "sellerName": "Sophia Wilson",
+    "details": "Realme X7, 128GB, Space Silver, moderate wear.",
+    "location": "Philadelphia, USA",
+    "originalPrice": 400,
+    "resellPrice": 250
+  },
+  {
+    "id": 7,
+    "img": "https://www.mobiledokan.com/media/nokia-81-purple-color-official-image.webp",
+    "yearsOfUse": 5,
+    "sellerName": "Noah Martinez",
+    "details": "Nokia 8.3, 128GB, Polar Night, good condition.",
+    "location": "San Antonio, USA",
+    "originalPrice": 650,
+    "resellPrice": 200
+  },
+  {
+    "id": 8,
+    "img": "https://www.mobiledokan.com/media/1710747510q7w7v.webp",
+    "yearsOfUse": 1,
+    "sellerName": "Isabella Garcia",
+    "details": "Vivo X60, 256GB, Shimmer Blue, excellent condition.",
+    "location": "San Diego, USA",
+    "originalPrice": 800,
+    "resellPrice": 650
+  },
+  {
+    "id": 9,
+    "img": "https://www.mobiledokan.com/media/huawei-p30-official-breathings-crystal-image.webp",
+    "yearsOfUse": 3,
+    "sellerName": "Mason Clark",
+    "details": "Huawei P30 Pro, 256GB, Aurora, good battery life.",
+    "location": "Dallas, USA",
+    "originalPrice": 900,
+    "resellPrice": 400
+  },
+  {
+    "id": 10,
+    "img": "https://www.mobiledokan.com/media/1713708053BHE9i.webp",
+    "yearsOfUse": 2,
+    "sellerName": "Olivia Harris",
+    "details": "Asus ROG Phone 5, 512GB, Phantom Black, like new.",
+    "location": "San Jose, USA",
+    "originalPrice": 1200,
+    "resellPrice": 950
+  },
+  {
+    "id": 11,
+    "img": "https://www.mobiledokan.com/media/1713695911xoeSY.webp",
+    "yearsOfUse": 2,
+    "sellerName": "William Lopez",
+    "details": "Sony Xperia 1 II, 256GB, Frosted Black, excellent display.",
+    "location": "Austin, USA",
+    "originalPrice": 1100,
+    "resellPrice": 700
+  },
+  {
+    "id": 12,
+    "img": "https://www.mobiledokan.com/media/apple-iphone-13-pro-max-sierra-blue-official-image.webp",
+    "yearsOfUse": 1,
+    "sellerName": "Charlotte Hill",
+    "details": "iPhone 13 Pro, 128GB, Sierra Blue, pristine condition.",
+    "location": "Jacksonville, USA",
+    "originalPrice": 1200,
+    "resellPrice": 1000
+  },
+  {
+    "id": 13,
+    "img": "https://www.mobiledokan.com/media/lg-velvet-5g-uw-aurora-red-official-image.webp",
+    "yearsOfUse": 4,
+    "sellerName": "James Walker",
+    "details": "LG V60 ThinQ, 256GB, Classy Blue, battery replaced.",
+    "location": "Fort Worth, USA",
+    "originalPrice": 800,
+    "resellPrice": 400
+  },
+  {
+    "id": 14,
+    "img": "https://www.mobiledokan.com/media/1713271419poJ4L.webp",
+    "yearsOfUse": 3,
+    "sellerName": "Amelia Young",
+    "details": "Motorola Edge+, 256GB, Smoky Sangria, some wear.",
+    "location": "Columbus, USA",
+    "originalPrice": 700,
+    "resellPrice": 350
+  },
+  {
+    "id": 15,
+    "img": "https://www.mobiledokan.com/media/1714330393oTW5d.webp",
+    "yearsOfUse": 2,
+    "sellerName": "Ethan Allen",
+    "details": "Oppo Find X3 Pro, 256GB, Gloss Black, slight scratches.",
+    "location": "Charlotte, USA",
+    "originalPrice": 1000,
+    "resellPrice": 600
+  },
+  {
+    "id": 16,
+    "img": "https://www.mobiledokan.com/media/1710833332s9TdL.webp",
+    "yearsOfUse": 1,
+    "sellerName": "Abigail Hernandez",
+    "details": "iPhone SE 2022, 64GB, Product Red, very good condition.",
+    "location": "San Francisco, USA",
+    "originalPrice": 430,
+    "resellPrice": 300
+  },
+  {
+    "id": 17,
+    "img": "https://www.mobiledokan.com/media/xiaomi-poco-f3-deep-ocean-blue-official-image.webp",
+    "yearsOfUse": 3,
+    "sellerName": "Alexander Scott",
+    "details": "Poco F3, 128GB, Arctic White, good condition.",
+    "location": "Indianapolis, USA",
+    "originalPrice": 450,
+    "resellPrice": 250
+  },
+  {
+    "id": 18,
+    "img": "https://www.mobiledokan.com/media/samsung-galaxy-note-10-aura-aura-glow-official-image.webp",
+    "yearsOfUse": 4,
+    "sellerName": "Harper King",
+    "details": "Samsung Galaxy Note 10, 256GB, Aura Glow, stylus included.",
+    "location": "Seattle, USA",
+    "originalPrice": 950,
+    "resellPrice": 500
+  },
+  {
+    "id": 19,
+    "img": "https://www.mobiledokan.com/media/xiaomi-redmi-note-11-pro-polar-white-phantom-white-official-image.webp",
+    "yearsOfUse": 2,
+    "sellerName": "Daniel Wright",
+    "details": "Redmi Note 11 Pro, 128GB, Graphite Gray, great battery.",
+    "location": "Denver, USA",
+    "originalPrice": 400,
+    "resellPrice": 250
+  },
+  {
+    "id": 20,
+    "img": "https://www.mobiledokan.com/media/sony-xperia-5-iii-black-official-image_1.webp",
+    "yearsOfUse": 5,
+    "sellerName": "Evelyn Lopez",
+    "details": "Sony Xperia 5 II, 256GB, Pink, aged but functional.",
+    "location": "Boston, USA",
+    "originalPrice": 800,
+    "resellPrice": 300
+  }
+]
