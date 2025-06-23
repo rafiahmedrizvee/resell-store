@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
+import { CartContextApi } from "../../../Context/CartContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CartContextApi } from "../../Context/CartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
-const Mobile = () => {
-
+const Tv = () => {
   const { handleAddToCart } = useContext(CartContextApi);
-  const [mobiles, setMobiles] = useState([]);
-  const [selectedMobiles, setSelectedMobiles] = useState(null);
+  const [tvs, setTv] = useState([]);
+  const [selectedTv, setSelectedTv] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({
     userName: "",
@@ -19,23 +18,23 @@ const Mobile = () => {
   });
 
   useEffect(() => {
-    fetch("mobiles.json")
+    fetch("tv.json")
       .then((res) => res.json())
-      .then((data) => setMobiles(data));
+      .then((data) => setTv(data));
   }, []);
 
-  const handleViewDetails = (mobile) => {
-    setSelectedMobiles(mobile);
+  const handleViewDetails = (tv) => {
+    setSelectedTv(tv);
   };
 
   const handleBackToList = () => {
-    setSelectedMobiles(null);
+    setSelectedTv(null);
   };
 
   const handleBooking = () => {
     toast.success("Booking successfully completed!");
     setShowModal(false);
-    handleAddToCart(selectedMobiles);
+    handleAddToCart(selectedTv);
   };
 
   const handleInputChange = (e) => {
@@ -43,7 +42,7 @@ const Mobile = () => {
     setBookingDetails({ ...bookingDetails, [name]: value });
   };
 
-          /*  Scrollbar */
+   /*  Scrollbar */
    const [isVisible, setIsVisible] = useState(false);
       const toggleVisibility = () => {
           if (window.pageYOffset > 100) {
@@ -67,35 +66,30 @@ const Mobile = () => {
               window.removeEventListener("scroll", toggleVisibility);
           };
       }, []);
-  
+
   return (
-    <div className="mt-[120px]">
-      <h1 className="text-3xl font-bold text-center">Smartphones</h1>
-
-      <div className="mt-[20px] md:mt-[40px] mb-[20px] flex justify-center">
-
-      
+    <div className="mt-[100px] md:mt-[140px] mb-[20px] flex justify-center">
       <ToastContainer />
 
-      {selectedMobiles && (
+      {selectedTv && (
         <div className="w-full max-w-2xl bg-base-100 shadow-xl p-5">
           <img
-            src={selectedMobiles.img}
-            alt={selectedMobiles.name}
+            src={selectedTv.img}
+            alt={selectedTv.name}
             className="rounded-lg mb-5"
           />
-          <h2 className="text-2xl font-bold mb-2">{selectedMobiles.name}</h2>
-          <h2 className="text-2xl font-semibold mb-3">Category: {selectedMobiles.category}</h2>
-          <p className="mb-2 font-semibold">Details: {selectedMobiles.details}</p>
-          <p className="mb-2 font-semibold">Seller: {selectedMobiles.sellerName}</p>
-          <p className="mb-2 font-semibold">Location: {selectedMobiles.location}</p>
-          <p className="mb-2 font-semibold">Years of Uses: {selectedMobiles.yearsOfUse} Years</p>
+          <h2 className="text-2xl font-bold mb-2">{selectedTv.name}</h2>
+          <h2 className="text-2xl font-semibold mb-3">Category: {selectedTv.category}</h2>
+          <p className="mb-2 font-semibold">Details: {selectedTv.details}</p>
+          <p className="mb-2 font-semibold">Seller: {selectedTv.sellerName}</p>
+          <p className="mb-2 font-semibold">Location: {selectedTv.location}</p>
+          <p className="mb-2 font-semibold">Years of Uses: {selectedTv.yearsOfUse} Years</p>
           <p className="mb-2 font-semibold">
             Original Price:{" "}
-            <span className="line-through"> {selectedMobiles.originalPrice}.00 TK</span>
+            <span className="line-through"> {selectedTv.originalPrice}.00 TK</span>
           </p>
           <p className="mb-4 text-primary font-bold">
-            Resell Price:  {selectedMobiles.resellPrice}.00 TK
+            Resell Price:  {selectedTv.resellPrice}.00 TK
           </p>
           <div className="flex gap-4">
             <button
@@ -114,44 +108,44 @@ const Mobile = () => {
         </div>
       )}
 
-      {!selectedMobiles && (
+      {!selectedTv && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-3">
-          {mobiles.map((mobile) => (
+          {tvs.map((tv) => (
             <div
-              key={mobile.id}
+              key={tv.id}
               className="rounded-md mx-0 bg-base-100 hover:shadow-2xl group relative md:w-[200px] xl:h-[450px] xl:w-[300px]"
             >
               <figure>
                 <div className="w-full relative mx-auto h-auto overflow-hidden rounded-lg">
                   <img
                     className="h-[130px] md:h-[260px] cursor-pointer w-full object-contain relative z-0 rounded-lg transition-all duration-300 hover:scale-110"
-                    src={mobile.img || "notFoundImg.png"}
+                    src={tv.img || "notFoundImg.png"}
                     onError={(e) => {
                       e.target.onError = null;
                       e.target.src = "notFoundImg.png";
                     }}
-                    alt={mobile.details ? mobile.name : ""}
+                    alt={tv.details ? tv.name : ""}
                   />
                 </div>
               </figure>
               <div className="flex justify-center text-center my-3">
                 <div className="max-w-xs overflow-hidden text-ellipsis px-2">
-                  <h4 className="font-semibold">{mobile.name}</h4>
+                  <h4 className="font-semibold">{tv.name}</h4>
                   
-                  <p className="truncate">Seller: {mobile.sellerName}</p>
-                  <p className="truncate">Location: {mobile.location}</p>
+                  <p className="truncate">Seller: {tv.sellerName}</p>
+                  <p className="truncate">Location: {tv.location}</p>
                  
                   <div className="md:flex justify-center items-center xl:gap-3">
                     <p className="font-semibold text-xl line-through text-[#969696]">
-                      $ {mobile.originalPrice}.00
+                      $ {tv.originalPrice}.00
                     </p>
                     <p className="font-semibold text-xl text-red-500">
-                      $ {mobile.resellPrice}.00
+                      $ {tv.resellPrice}.00
                     </p>
                   </div>
                   <div className="card-actions justify-center">
                     <button
-                      onClick={() => handleViewDetails(mobile)}
+                      onClick={() => handleViewDetails(tv)}
                       className="btn rounded-sm sm:w-[150px] md:w-[230px] lg:w-[450px] xl:w-[450px] 2xl:w-[450px] mt-3 text-[19px] xl:text-xl hover:bg-blue-500 bg-black text-white"
                     >
                       View Details
@@ -225,9 +219,8 @@ const Mobile = () => {
           </div>
         </div>
       )}
-    </div>
 
-    <div>
+       <div>
                 {/* Scroll to top button */}
                 {isVisible && (
                     <button
@@ -242,4 +235,4 @@ const Mobile = () => {
   );
 };
 
-export default Mobile;
+export default Tv;

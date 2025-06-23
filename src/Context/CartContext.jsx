@@ -8,6 +8,10 @@ export const CartContextApi = createContext()
 
 const CartContext = ({ children }) => {
     const [cart, setCart] = useState([]);
+    // console.log(cart);
+    
+
+
     // const handleClearCart = () => {
     //     setCart([]);
     // }

@@ -10,6 +10,12 @@ import { productsAndCartLoader } from "../../Loaders/productsAndCartLoader";
 import Orders from "../../Pages/Orders/Orders";
 import NotFound from "../../Pages/Shared/NotFound/NotFound";
 import Laptop from "../../Pages/Home/Laptop/Laptop";
+import Tv from "../../Pages/Home/Tv/Tv";
+import AllCategories from "../../Pages/Home/Category/AllCategories";
+import Contact from "../../Pages/Contact/Contact";
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -28,13 +34,27 @@ const router = createBrowserRouter([
         path: "/mobile",
         element: <Mobile></Mobile>,
       },
+      
       {
         path: "/laptop",
         element: <Laptop></Laptop>,
       },
+     
+      {
+        path: "/tv",
+        element: <Tv></Tv>,
+      },
+      {
+        path: "/all-categories",
+        element: <AllCategories></AllCategories>,
+      },
       {
         path: "/blog",
         element: <Blog></Blog>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
       {
         path: "/sign-up",

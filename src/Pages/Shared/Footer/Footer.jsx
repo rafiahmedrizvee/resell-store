@@ -18,16 +18,16 @@ const Footer = () => {
             Explore our curated collection of watches, blending elegance with functionality. Perfect for every style and occasion.
           </p>
           <div className="flex space-x-4 mt-6">
-            <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-500 transition duration-200">
+            <a href="https://www.facebook.com/rizvi.roxas" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-500 transition duration-200">
               <FaFacebookF />
             </a>
-            <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-400 transition duration-200">
+            <a href="https://www.facebook.com/rizvi.roxas" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-400 transition duration-200">
               <FaTwitter />
             </a>
-            <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-pink-500 transition duration-200">
+            <a href="https://www.facebook.com/rizvi.roxas" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-pink-500 transition duration-200">
               <FaInstagram />
             </a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-700 transition duration-200">
+            <a href="https://www.linkedin.com/in/mazharul-alam-rafi-3b3126335/" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-700 transition duration-200">
               <FaLinkedinIn />
             </a>
           </div>
@@ -39,7 +39,7 @@ const Footer = () => {
           <ul className="space-y-3 bg-gray-100 dark:bg-primary dark:text-primary duration-200">
             {["About Us", "Services", "Blog", "Contact"].map((item, index) => (
               <li key={index}>
-                <Link to="#" className="flex items-center gap-2 hover:text-primary transition duration-200">
+                <Link to="/home" className="flex items-center gap-2 hover:text-primary transition duration-200">
                   <FiArrowRight className="text-sm" />
                   {item}
                 </Link>
@@ -74,12 +74,12 @@ const Footer = () => {
       {/* Footer Bottom */}
       <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm">
         <p className="bg-gray-100 dark:bg-gray-950 dark:text-white duration-200">
-          © {new Date().getFullYear()} Your Company. All rights reserved.
+          © {new Date().getFullYear()} Resell Mobile Store. All rights reserved by Rafi Ahmed Rizvee.
         </p>
         <div className="mt-3 space-x-4">
-          <Link to="#" className="bg-gray-100 dark:bg-gray-950 dark:text-white  hover:text-white transition duration-200">Privacy Policy</Link>
+          <Link to="/home" className="bg-gray-100 dark:bg-gray-950 dark:text-white  hover:text-white transition duration-200">Privacy Policy</Link>
           <span className="bg-gray-100 dark:bg-gray-950 dark:text-white duration-200">|</span>
-          <Link to="#" className="bg-gray-100 dark:bg-gray-950 dark:text-white hover:text-white transition duration-200">Terms of Service</Link>
+          <Link to="/blog" className="bg-gray-100 dark:bg-gray-950 dark:text-white hover:text-white transition duration-200">Terms of Service</Link>
         </div>
       </div>
     </footer>

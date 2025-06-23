@@ -1,25 +1,29 @@
-import React, { useState, } from 'react';
+import React, { useContext, useState, } from 'react';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLoaderData } from 'react-router-dom';
 import { deleteShoppingCart, removeFromDb } from '../../Utilities/fakedb';
+import { CartContextApi } from '../../Context/CartContext';
+
+
 
 const Orders = () => {
+    const {cart, setCart } = useContext(CartContextApi);
     const { initialCart } = useLoaderData() || {};
-    const [cart, setCart] = useState(initialCart || []);
-    console.log(cart);
+    // const [cart, setCart] = useState(initialCart || []);
+    // console.log(cart);
 
     let total = 0;
     let subTotal = 0;
     let quantity = 0;
     for (const product of cart) {
         quantity = quantity + product.quantity;
-        subTotal = total + product.price * product.quantity;
-        total = total + product.price * product.quantity;
+        subTotal = total + product.resellPrice * product.quantity;
+        total = total + product.resellPrice * product.quantity;
 
 
     }
-    const handleRemoveItem = (id) => {
+   const handleRemoveItem = (id) => {
         const removeItem = cart.filter(product => product.id !== id);
         setCart(removeItem);
         removeFromDb(id);
@@ -59,13 +63,13 @@ const Orders = () => {
                             <img className='w-[70px] md:w-[100px] lg:w-[110px] md:h-[100px] 2xl:w-[120px] h-[70px] 2xl:h-[120px] object-contain' src={product.img} alt="" />
                         </div>
                         <div className='w-[70px] md:w-[80px] xl:w-[110px] lg:w-[110px] 2xl:w-[230px] hidden lg:flex justify-center'>
-                            <h1>{product.name}</h1>
+                            <h1>{product.details}</h1>
                         </div>
                         <div className='w-[70px] md:w-[80px] xl:w-[110px] lg:w-[110px] 2xl:w-[230px] flex justify-center'>
-                            <h1>{product.quantity}</h1>
+                            <h1> {product.quantity}</h1>
                         </div>
                         <div className='w-[70px] md:w-[80px] xl:w-[110px] lg:w-[110px] 2xl:w-[230px] flex justify-center'>
-                            <h1>Tk {product.price} </h1>
+                            <h1>TK {product.resellPrice} </h1>
                         </div>
                         <div className='w-[70px] md:w-[80px] xl:w-[110px] lg:w-[110px] 2xl:w-[230px] flex justify-center 0'>
                             <button onClick={() => handleRemoveItem(product.id)}>{<FontAwesomeIcon className='w-5 md:w-6 md:h-6 lg:w-7 lg:h-7 h-5 md:mr-4 ' icon={faCircleXmark} />}</button>
@@ -85,12 +89,12 @@ const Orders = () => {
                         <hr className="border-gray-300 w-full md:w-64" />
                         <div className="flex justify-between items-center py-2 md:w-64">
                             <div className="text-xl md:text-2xl font-normal text-gray-800">Sub-Total:</div>
-                            <div className="text-xl md:text-2xl font-normal text-red-500">Tk {subTotal}</div>
+                            <div className="text-xl md:text-2xl font-normal text-red-500">TK {subTotal}</div>
                         </div>
                         <hr className="border-gray-300 w-full md:w-64" />
                         <div className="flex justify-between items-center py-2 md:w-64">
                             <div className="text-xl md:text-2xl font-normal text-gray-800">Total:</div>
-                            <div className="text-xl md:text-2xl font-normal text-red-500">Tk {total} </div>
+                            <div className="text-xl md:text-2xl font-normal text-red-500">TK {total} </div>
                         </div>
                         <hr className="border-gray-300 w-full md:w-64" />
                         <div className=" font-bold flex  justify-center items-center">

@@ -17,10 +17,11 @@ const ImageSlider = () => {
 
     const images = [
       
-        "https://dazzle.com.bd/_next/image?url=https%3A%2F%2Fdazzle.sgp1.cdn.digitaloceanspaces.com%2F36176%2Fonline-v2.jpg&w=1920&q=75",
+        "https://mobilebuzzbd.com/wp-content/uploads/2025/05/Untitled-2.jpg",
+        "https://www.applegadgetsbd.com/_next/image?url=https%3A%2F%2Fadminapi.applegadgetsbd.com%2Fstorage%2Fmedia%2Flarge%2FMacBook-Air-M4-13-Inch-1621.jpg&w=1920&q=75",
         "https://sumashtechbucket.s3.ap-south-1.amazonaws.com/images/web/slider/iPhone-16-Series.webp",
         "https://mobilebuzzbd.com/wp-content/uploads/2025/06/01-2-1536x839.jpg",
-        "https://mobilebuzzbd.com/wp-content/uploads/2025/05/Untitled-2.jpg",
+        
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
