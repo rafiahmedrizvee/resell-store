@@ -8,8 +8,9 @@ import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import ProductCard from './Products/ProductCard';
 import AllCategories from './Category/AllCategories';
 import { Link } from 'react-router-dom';
-import ReviewSection from './Review/ReviewSection';
+
 import Blog from '../Blog/Blog';
+import About from '../About/About';
 
 
 
@@ -39,16 +40,18 @@ const Home = () => {
         };
     }, []);
 
+    
         return (
 
                 
                 <div>
-                        <ImageSlider></ImageSlider>
+                     <div>
+                         <ImageSlider></ImageSlider>
+                     </div>
 
-                       <ProductCard></ProductCard>
-
-                      
-
+                    <div>
+                         <ProductCard></ProductCard>
+                    </div>
 
             <div className="bg-gray-50">
       {/* Hero Section */}
@@ -57,21 +60,14 @@ const Home = () => {
         <p className="mt-4 text-lg">Browse the latest models at unbeatable prices.</p>
       <Link to="/mobile" >
         <button className="mt-6 px-6 py-3 bg-white text-primary rounded-lg shadow-md hover:bg-secondary font-bold">
-              Shop Now
-         
+              Shop Now      
         </button>
       </Link>
-      </div>
-
-     
+      </div>     
       {/* Featured Products */}
       <div className="py-5  ">
-        <h2 className="text-3xl font-bold text-center my-10">Trending Now</h2>
-      
-          
-            <AllCategories></AllCategories>
-         
-       
+        <h2 className="text-3xl font-bold text-center my-10">Trending Now</h2>   
+            <AllCategories></AllCategories>   
       </div>
 
        {/* Product Categories */}
@@ -103,11 +99,19 @@ const Home = () => {
      
         </div>
       </section>
+    <div>
+      <About></About>
+    </div>
       <div>
         <Blog></Blog>
       </div>
+      
        
     </div>
+
+
+
+
       <div>
                 {/* Scroll to top button */}
                 {isVisible && (

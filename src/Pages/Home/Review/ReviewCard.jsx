@@ -3,9 +3,9 @@ import React from 'react';
 
 const ReviewCard = ({ review }) => {
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-4 flex flex-col items-center space-y-4">
+    <div className="bg-secondary shadow-lg rounded-2xl p-4 flex flex-col items-center space-y-4">
       <img
-        className="w-20 h-20 rounded-full border-2 border-blue-500"
+        className="w-20 h-20 rounded-full border-2 object-cover border-blue-500"
         src={review.image}
         alt={review.name}
       />

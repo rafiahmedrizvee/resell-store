@@ -1,6 +1,35 @@
-import React from "react";
+import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
 
 const Contact = () => {
+
+  /*  Scrollbar */
+   const [isVisible, setIsVisible] = useState(false);
+      const toggleVisibility = () => {
+          if (window.pageYOffset > 100) {
+              setIsVisible(true);
+          } else {
+              setIsVisible(false);
+          }
+      };
+  
+      const scrollToTop = () => {
+          window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+          });
+      };
+  
+      useEffect(() => {
+          window.addEventListener("scroll", toggleVisibility);
+  
+          return () => {
+              window.removeEventListener("scroll", toggleVisibility);
+          };
+      }, []);
+
+
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-2xl overflow-hidden">
@@ -81,6 +110,18 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      <div>
+                {/* Scroll to top button */}
+                {isVisible && (
+                    <button
+                        onClick={scrollToTop}
+                        className="flex justify-center items-center fixed bottom-12 right-12 p-3 h-[55px] object-cover w-[55px] bg-gray-300 font-bold hover:text-white  rounded-full shadow-lg hover:bg-black transition-all"
+                    >
+                        <FontAwesomeIcon className='w-9 h-5 font-bold' icon={faAngleUp} />
+                    </button>
+                )}
+            </div>
     </div>
   );
 };

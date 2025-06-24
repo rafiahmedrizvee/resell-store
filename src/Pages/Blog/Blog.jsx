@@ -27,7 +27,7 @@ const Blog = () => {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 ">
       {/* Header */}
       <header className="bg-blue-600 text-white py-6">
         <div className="container mx-auto px-4 text-center">

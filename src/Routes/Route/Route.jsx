@@ -13,6 +13,13 @@ import Laptop from "../../Pages/Home/Laptop/Laptop";
 import Tv from "../../Pages/Home/Tv/Tv";
 import AllCategories from "../../Pages/Home/Category/AllCategories";
 import Contact from "../../Pages/Contact/Contact";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import DashboardLayout from "../../Layout/DashboardLayout";
+// import AdminRoute from "../AdminRoute/AdminRoute";
+import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
+import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
+import MyOrder from "../../Pages/Dashboard/MyOrder/MyOrder";
+import ManageProduct from "../../Pages/Dashboard/ManageProduct/ManageProduct";
 
 
 
@@ -76,6 +83,33 @@ const router = createBrowserRouter([
     ],
 
     
+  },
+  {
+    path: "/dashboard",
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute> ,
+    children: [
+        {
+        path: "/dashboard",
+        element: <PrivateRoute><MyOrder /></PrivateRoute> ,
+      },
+      {
+        path: "/dashboard/my-order",
+        element: <PrivateRoute><MyOrder/></PrivateRoute>,
+      },
+    
+      {
+        path: "/dashboard/all-users",
+        element:  <AdminRoute><AllUsers/></AdminRoute>,
+      },
+      {
+        path: "/dashboard/manage-product",
+        element: <PrivateRoute><ManageProduct /></PrivateRoute> ,
+      },
+      {
+        path: "/dashboard/add-product",
+        element: <PrivateRoute><AddProduct /></PrivateRoute> ,
+      },
+    ],
   },
 
   {

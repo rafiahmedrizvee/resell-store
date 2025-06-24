@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState, } from 'react';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faCircleXmark, } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLoaderData } from 'react-router-dom';
-import { deleteShoppingCart, removeFromDb } from '../../Utilities/fakedb';
-import { CartContextApi } from '../../Context/CartContext';
+
+import { deleteShoppingCart, removeFromDb } from '../../../Utilities/fakedb';
+import { CartContextApi } from '../../../Context/CartContext';
 
 
 
-const Orders = () => {
+const MyOrder = () => {
     const {cart, setCart } = useContext(CartContextApi);
     const { initialCart } = useLoaderData() || {};
     // const [cart, setCart] = useState(initialCart || []);
@@ -101,81 +102,25 @@ const Orders = () => {
                     </div>
                 ))}
 
-                <div className='md:flex md:justify-between my-7 md:mx-10 '>
-                    <div>
-                        {/* Empty Div */}
-                    </div>
-                    <div className=''>
-                        <div className=" flex justify-between items-center py-2  md:w-64">
-                            <div className="text-xl md:text-2xl font-normal text-gray-800">Total Selected Item :</div>
-                            <div className="text-xl md:text-2xl font-normal text-red-500">{quantity}</div>
-                        </div>
-                        <hr className="border-gray-300 w-full md:w-64" />
-                        <div className="flex justify-between items-center py-2 md:w-64">
-                            <div className="text-xl md:text-2xl font-normal text-gray-800">Sub-Total:</div>
-                            <div className="text-xl md:text-2xl font-normal text-red-500">TK {subTotal}</div>
-                        </div>
-                        <hr className="border-gray-300 w-full md:w-64" />
-                        <div className="flex justify-between items-center py-2 md:w-64">
-                            <div className="text-xl md:text-2xl font-normal text-gray-800">Total:</div>
-                            <div className="text-xl md:text-2xl font-normal text-red-500">TK {total} </div>
-                        </div>
-                        <hr className="border-gray-300 w-full md:w-64" />
-                        <div className=" font-bold flex  justify-center items-center">
-                            <button onClick={clearCart} className=' btn btn-primary text-white md:w-[170px] rounded-sm my-6'>Clear All Products</button>
-                        </div>
-                    </div>
-                </div>
+                
 
 
-                <div className='md:my-32 '>
-                    <div className='my-4 mx-2'>
-                        <h1 className='font-bold text-xl'>What would you like to do next?</h1>
-                        <p className=' my-1'>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
-                    </div>
-                    <div className='md:flex justify-between items-center bg-[#f1f5f9] h-[110px] md:h-[80px]  rounded-lg'>
-                        <div className='flex md:mx-5 items-center my-2 md:my-0'>
-                            <div>
-                                <input className='w-[150px]  input  input-bordered font-bold  bg-transparent' type="text" placeholder='Promo / Coupon Code' />
-                            </div>
-                            <div>
-                                <button className=' btn border-none btn-primary mx-2 btn-outline rounded-sm ring-2 ring-[#3749bb]'>Apply Coupon</button>
-                            </div>
-                        </div>
-                        <div className='flex md:mx-5 items-center'>
-
-                            <div>
-                                <input className='w-[150px] input input-bordered font-bold  bg-[#f3f5f7]' type="text" placeholder='Enter your gift voucher code here' />
-                            </div>
-                            <div>
-                                <button className='btn border-none btn-primary mx-2 btn-outline rounded-sm ring-2 ring-[#3749bb]'>Apply Voucher</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex justify-between my-20 gap-2'>
-                        <div>
+              
+                       
+                  
+                    <div className=' my-20 gap-2'>
+                        <div className='flex justify-center items-center'>
                             <button className='btn btn-primary text-white md:w-[160px] rounded-sm'><Link to="/home">Continue Shopping</Link></button>
                         </div>
-                        <div>
-                            <button className='btn btn-primary text-white  md:w-[160px] rounded-sm'>Confirm Order</button>
-                        </div>
+                     
                     </div>
                 </div>
             </div>
 
-              <div>
-                {/* Scroll to top button */}
-                {isVisible && (
-                    <button
-                        onClick={scrollToTop}
-                        className="flex justify-center items-center fixed bottom-12 right-12 p-3 h-[55px] object-cover w-[55px] bg-gray-300 font-bold hover:text-white  rounded-full shadow-lg hover:bg-black transition-all"
-                    >
-                        <FontAwesomeIcon className='w-9 h-5 font-bold' icon={faAngleUp} />
-                    </button>
-                )}
-            </div>
-        </div>
+             
+        
+     
     );
 };
 
-export default Orders;
+export default MyOrder;

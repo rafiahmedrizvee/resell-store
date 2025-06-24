@@ -135,7 +135,7 @@ const SignUp = () => {
               <div>
                 <a className="link link-hover">
                   Already Have an Account?
-                  <Link className="text-secondary" to="/sign-in">
+                  <Link className="text-primary" to="/sign-in">
                     Please Log in
                   </Link>
                 </a>

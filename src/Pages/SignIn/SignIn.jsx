@@ -50,7 +50,7 @@ formState: { errors },reset,} = useForm();
     <div className="flex justify-center items-center h-screen">
       <div>
         <h1 className="text-5xl font-semibold text-primary mb-5 text-center">
-          Log In Now
+          Sign In Now
         </h1>
         <div className="card bg-base-100 w-96 shrink-0 shadow-2xl">
           <div className="card-body">
@@ -82,7 +82,7 @@ formState: { errors },reset,} = useForm();
               <div>
                 <a className="link link-hover">
                   New to Website?
-                  <Link className="text-secondary" to="/sign-up">
+                  <Link className="text-primary" to="/sign-up">
                     Create an Account
                   </Link>
                 </a>
@@ -90,13 +90,13 @@ formState: { errors },reset,} = useForm();
               <input
                 type="submit"
                 value="Sign In"
-                className="btn btn-primary mt-4 text-white"
+                className="btn btn-primary mt-4 text-secondary"
               />
             </form>
 
             <button 
             onClick={googleLogin}
-            className="btn btn-primary mt-4 text-white">
+            className="btn btn-primary mt-4 text-secondary">
               <img className="w-8 h-8" src={google} alt="google" />
               Continue With Google
             </button>

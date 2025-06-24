@@ -94,19 +94,24 @@ const Header = () => {
   
         <ul
         tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-60 p-2 shadow">
   {
     user?.uid ? ( <>
           <li>
-          <a className="justify-between">
+          <a className="justify-between font-bold">
            {user?.displayName}
             <span className="badge">{user?.uid.slice(0,10)}</span>
           </a>
         </li>
-        <li><a>{user?.email} </a></li>
-          <li className="md:text-xl text-center items-center font-semibold text-[#32b4e7] hover:bg-[#32b4e778] hover:text-black">
-      <Link to="/dashboard">Dashboard</Link>
+        <li><a className='font-bold'>
+          <span>Email</span>
+          
+          {user?.email} </a></li>
+          <Link to="/dashboard">
+          <li className=" text-center items-center font-bold hover:bg-primary hover:text-secondary">
+      Dashboard
     </li>
+    </Link>
         <li>
           <a onClick={logOut}>Logout</a>
           </li>
