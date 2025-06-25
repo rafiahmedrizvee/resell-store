@@ -20,7 +20,7 @@ const SignUp = () => {
   const savedUsers = (name, email) => {
     const user = { name, email };
 
-    fetch("https://localhost7000/users", {
+    fetch("https://mobile-store-phi.vercel.app/users/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -20,6 +20,8 @@ import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import MyOrder from "../../Pages/Dashboard/MyOrder/MyOrder";
 import ManageProduct from "../../Pages/Dashboard/ManageProduct/ManageProduct";
+import AdminRoute from "../AdminRoute/AdminRoute";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 
 
 
@@ -78,7 +80,7 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         loader: productsAndCartLoader ,
-        element: <Orders> </Orders>,
+        element: <PrivateRoute><Orders/></PrivateRoute>,
       },
     ],
 
@@ -95,6 +97,12 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my-order",
         element: <PrivateRoute><MyOrder/></PrivateRoute>,
+      },
+      {
+        path: "/dashboard/payment/:id",
+        loader: productsAndCartLoader,
+        // ({params}) => fetch(`https://mobile-store-phi.vercel.app/bookings/${params.id}`)
+        element: <PrivateRoute><Payment/></PrivateRoute>,
       },
     
       {
