@@ -11,7 +11,7 @@ const ManageProduct = () => {
     queryKey: ["all-service"],
     queryFn: async () => {
       const res = await fetch(
-        "https://mobile-store-phi.vercel.app/all-service"
+        "https://resell-mobile-shop.vercel.app/all-service"
       );
       const data = await res.json();
       return data;

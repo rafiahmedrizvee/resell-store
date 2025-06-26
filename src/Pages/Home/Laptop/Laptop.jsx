@@ -7,14 +7,13 @@ import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { Link } from "react-router-dom";
 
-
 const Laptop = () => {
   const { handleAddToCart } = useContext(CartContextApi);
   const { user } = useContext(AuthContext);
   const [laptops, setLaptops] = useState([]);
   const [selectedLaptop, setSelectedLaptop] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [bookingDetails, setBookingDetails] = useState({
     userName: "",
     email: "",
@@ -22,21 +21,53 @@ const Laptop = () => {
     phoneNumber: "",
   });
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("https://mobile-store-phi.vercel.app/laptops")
-      .then((res) => res.json())
-      .then((data) =>{
-        setLaptops(data);
-        setLoading(false); 
-        
-      } )
-      .catch(() => setLoading(false));
-    
-  },[]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch("https://resell-mobile-shop.vercel.app/laptops")
+  //     .then((res) => res.json())
+  //     .then((data) =>{
+  //       setLaptops(data);
+  //       setLoading(false);
 
-   
-  
+  //     } )
+  //     .catch(() => setLoading(false));
+
+  // },[]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Attempt to fetch data from the main server
+        const response = await fetch(
+          "https://resell-mobile-shop.vercel.app/laptops"
+        );
+        if (!response.ok) {
+          throw new Error("Server error");
+        }
+        const data = await response.json();
+        setLaptops(data);
+      } catch (error) {
+        console.error("Primary fetch failed, trying fallback:", error);
+        try {
+          // Fetch data from the local JSON file as a fallback
+          const fallbackResponse = await fetch("/laptops.json");
+          if (!fallbackResponse.ok) {
+            throw new Error("Fallback fetch failed");
+          }
+          const fallbackData = await fallbackResponse.json();
+          setLaptops(fallbackData);
+        } catch (fallbackError) {
+          console.error("Both fetch attempts failed:", fallbackError);
+          toast.error("Failed to load data from both sources.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleViewDetails = (laptop) => {
     setSelectedLaptop(laptop);
@@ -178,7 +209,7 @@ const Laptop = () => {
       )}
 
       {!selectedLaptop && (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  md:gap-3 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3 ">
           {laptops.map((laptop) => (
             <div
               key={laptop.id}
@@ -191,7 +222,7 @@ const Laptop = () => {
                     src={laptop.img}
                     onError={(e) => {
                       e.target.onError = null;
-                      e.target.src = notFoundImg
+                      e.target.src = notFoundImg;
                     }}
                     alt={laptop.details ? laptop.name : ""}
                   />
@@ -335,7 +366,7 @@ const Laptop = () => {
               />
             </div>
             <div className="flex justify-end gap-4">
-              <Link to="/orders">
+              <Link to="/dashboard/my-order">
                 <button
                   onClick={handleBooking}
                   className="btn bg-blue-500 text-white"

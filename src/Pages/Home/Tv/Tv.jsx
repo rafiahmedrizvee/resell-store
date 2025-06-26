@@ -13,7 +13,7 @@ const Tv = () => {
   const [tvs, setTv] = useState([]);
   const [selectedTv, setSelectedTv] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [bookingDetails, setBookingDetails] = useState({
     userName: "",
     email: "",
@@ -21,15 +21,50 @@ const Tv = () => {
     phoneNumber: "",
   });
 
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch("https://resell-mobile-shop.vercel.app/tv")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setTv(data);
+  //       setLoading(false);
+  //     })
+  //   .catch(() => setLoading(false));
+  // }, []);
+
   useEffect(() => {
-    setLoading(true);
-    fetch("https://mobile-store-phi.vercel.app/tv")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Attempt to fetch data from the main server
+        const response = await fetch(
+          "https://resell-mobile-shop.vercel.app/tv"
+        );
+        if (!response.ok) {
+          throw new Error("Server error");
+        }
+        const data = await response.json();
         setTv(data);
+      } catch (error) {
+        console.error("Primary fetch failed, trying fallback:", error);
+        try {
+          // Fetch data from the local JSON file as a fallback
+          const fallbackResponse = await fetch("/tvs.json");
+          if (!fallbackResponse.ok) {
+            throw new Error("Fallback fetch failed");
+          }
+          const fallbackData = await fallbackResponse.json();
+          setTv(fallbackData);
+        } catch (fallbackError) {
+          console.error("Both fetch attempts failed:", fallbackError);
+          toast.error("Failed to load data from both sources.");
+        }
+      } finally {
         setLoading(false);
-      })
-    .catch(() => setLoading(false));
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleViewDetails = (tv) => {
@@ -166,11 +201,11 @@ const Tv = () => {
       )}
 
       {!selectedTv && (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  md:gap-3 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3 ">
           {tvs.map((tv) => (
             <div
               key={tv.id}
-             className="rounded-md mx-0 bg-base-100 hover:shadow-2xl group relative md:w-[200px] xl:h-[450px] xl:w-[300px]"
+              className="rounded-md mx-0 bg-base-100 hover:shadow-2xl group relative md:w-[200px] xl:h-[450px] xl:w-[300px]"
             >
               <figure>
                 <div className="w-full relative mx-auto h-auto overflow-hidden rounded-lg">
@@ -179,7 +214,7 @@ const Tv = () => {
                     src={tv.img}
                     onError={(e) => {
                       e.target.onError = null;
-                      e.target.src = notFoundImg.png
+                      e.target.src = notFoundImg.png;
                     }}
                     alt={tv.details ? tv.name : ""}
                   />
@@ -189,8 +224,8 @@ const Tv = () => {
                 <div className="max-w-xs overflow-hidden text-ellipsis px-2">
                   <h4 className="font-semibold py-2 truncate">{tv.name}</h4>
 
-                  <p className=" truncate">{tv.sellerName}</p>
-                  <p className="truncate">{tv.location}</p>
+                  <p className=" truncate">Seller: {tv.sellerName}</p>
+                  <p className="truncate">Location: {tv.location}</p>
 
                   <div className="md:flex justify-center items-center xl:gap-3">
                     <p className="font-semibold text-xl line-through text-[#969696]">
@@ -323,7 +358,7 @@ const Tv = () => {
               />
             </div>
             <div className="flex justify-end gap-4">
-              <Link to="/orders">
+              <Link to="/dashboard/my-order">
                 <button
                   onClick={handleBooking}
                   className="btn bg-blue-500 text-white"

@@ -13,7 +13,7 @@ const Mobile = () => {
   const [mobiles, setMobiles] = useState([]);
   const [selectedMobiles, setSelectedMobiles] = useState(null);
   const [showModal, setShowModal] = useState(false);
-     const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [bookingDetails, setBookingDetails] = useState({
     userName: "",
     email: "",
@@ -21,15 +21,49 @@ const Mobile = () => {
     phoneNumber: "",
   });
 
+  // useEffect(() => {
+  //      setLoading(true);
+  //   fetch("https://resell-mobile-shop.vercel.app/mobile")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setMobiles(data);
+  //       setLoading(false);
+  //     })
+  //      .catch(() => setLoading(false));
+  // }, []);
   useEffect(() => {
-       setLoading(true);
-    fetch("https://mobile-store-phi.vercel.app/mobile")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Attempt to fetch data from the main server
+        const response = await fetch(
+          "https://resell-mobile-shop.vercel.app/mobile"
+        );
+        if (!response.ok) {
+          throw new Error("Server error");
+        }
+        const data = await response.json();
         setMobiles(data);
+      } catch (error) {
+        console.error("Primary fetch failed, trying fallback:", error);
+        try {
+          // Fetch data from the local JSON file as a fallback
+          const fallbackResponse = await fetch("/mobiles.json");
+          if (!fallbackResponse.ok) {
+            throw new Error("Fallback fetch failed");
+          }
+          const fallbackData = await fallbackResponse.json();
+          setMobiles(fallbackData);
+        } catch (fallbackError) {
+          console.error("Both fetch attempts failed:", fallbackError);
+          toast.error("Failed to load data from both sources.");
+        }
+      } finally {
         setLoading(false);
-      })
-       .catch(() => setLoading(false));
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleViewDetails = (mobile) => {
@@ -38,6 +72,40 @@ const Mobile = () => {
 
   const handleBackToList = () => {
     setSelectedMobiles(null);
+  };
+
+  const handleAppointment = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const userName = form.name.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+
+    const booking = {
+      serviceName: name,
+      name: userName,
+      email,
+      phone,
+    };
+
+    fetch("https://resell-mobile-shop.vercel.app/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          form.reset();
+          toast.success("Booking Successfully Done!👏");
+          setTime("");
+          refetch();
+        } else {
+          toast.error(data.message);
+        }
+      });
   };
 
   const handleBooking = () => {
@@ -85,7 +153,6 @@ const Mobile = () => {
     }
   };
 
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100">
@@ -117,7 +184,6 @@ const Mobile = () => {
       </div>
     );
   }
-
 
   return (
     <div className="mt-[100px] md:mt-[140px] mb-[50px] flex justify-center">
@@ -174,7 +240,7 @@ const Mobile = () => {
       )}
 
       {!selectedMobiles && (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  md:gap-3 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3 ">
           {mobiles.map((mobile) => (
             <div
               key={mobile.id}
@@ -197,8 +263,8 @@ const Mobile = () => {
                 <div className="max-w-xs overflow-hidden text-ellipsis px-2">
                   <h4 className="font-semibold">{mobile.name}</h4>
 
-                  <p className="truncate">{mobile.sellerName}</p>
-                  <p className="truncate">{mobile.location}</p>
+                  <p className="truncate">Seller: {mobile.sellerName}</p>
+                  <p className="truncate">Location: {mobile.location}</p>
 
                   <div className="md:flex justify-center items-center xl:gap-3">
                     <p className="font-semibold text-xl line-through text-[#969696]">
@@ -224,130 +290,123 @@ const Mobile = () => {
       )}
 
       {showModal && (
-        <div className="fixed inset-0 bg-secondary bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 w-full max-w-lg">
-            <h2 className="text-xl font-bold mb-4 text-center">
-              Booking Details
-            </h2>
-            <div className="mb-1">
-              <label
-                for="name"
-                className="block text-[15px] font-bold text-gray-700 m-1"
-              >
-                Seller Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                className="input input-bordered w-full"
-                readOnly
-                value={selectedMobiles.sellerName}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="mb-1">
-              <label
-                for="name"
-                className="block text-[15px] font-bold text-gray-700 m-1"
-              >
-                Product Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                className="input input-bordered w-full"
-                readOnly
-                value={selectedMobiles.name}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="mb-1">
-              <label
-                for="name"
-                className="block text-[15px] font-bold text-gray-700 m-1"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                className="input input-bordered w-full"
-                value={user?.email}
-                readOnly
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="mb-1">
-              <label
-                for="location"
-                className="block text-[15px] font-bold text-gray-700 m-1"
-              >
-                Location
-              </label>
-              <input
-                name="location"
-                placeholder="Location"
-                className="input input-bordered w-full"
-                value={selectedMobiles.location}
-                readOnly
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="mb-1">
-              <label
-                for="name"
-                className="block text-xl font-bold text-gray-700 m-1"
-              >
-                Resell Price
-              </label>
-
-              <span className="text-gray-500 mr-2 text-lg">TK</span>
-              <input
-                type="text"
-                onChange={handleChange}
-                placeholder="Enter amount"
-                readOnly
-                value={selectedMobiles.resellPrice}
-                className="flex-1 bg-transparent outline-none text-gray-700"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                for="name"
-                className="block text-xl font-bold text-gray-700 m-1"
-              >
-                Mobile Number
-              </label>
-              <input
-                type="text"
-                name="phoneNumber"
-                placeholder="Phone Number"
-                className="input input-bordered w-full"
-                value={bookingDetails.phoneNumber}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex justify-end gap-4">
-              <Link to="/orders">
-                <button
-                  onClick={handleBooking}
-                  className="btn bg-blue-500 text-white"
+        <form onSubmit={handleAppointment}>
+          <div className="fixed inset-0 bg-secondary bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-8 w-full max-w-lg">
+              <h2 className="text-xl font-bold mb-4 text-center">
+                Booking Details
+              </h2>
+              <div className="mb-1">
+                <label className="block text-[15px] font-bold text-gray-700 m-1">
+                  Seller Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  className="input input-bordered w-full"
+                  readOnly
+                  value={selectedMobiles.sellerName}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="mb-1">
+                <label className="block text-[15px] font-bold text-gray-700 m-1">
+                  Product Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  className="input input-bordered w-full"
+                  readOnly
+                  value={selectedMobiles.name}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="mb-1">
+                <label className="block text-[15px] font-bold text-gray-700 m-1">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  className="input input-bordered w-full"
+                  value={user?.email}
+                  readOnly
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="mb-1">
+                <label
+                  for="location"
+                  className="block text-[15px] font-bold text-gray-700 m-1"
                 >
-                  Confirm Booking
+                  Location
+                </label>
+                <input
+                  name="location"
+                  placeholder="Location"
+                  className="input input-bordered w-full"
+                  value={selectedMobiles.location}
+                  readOnly
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="mb-1">
+                <label
+                  for="name"
+                  className="block text-xl font-bold text-gray-700 m-1"
+                >
+                  Resell Price
+                </label>
+
+                <span className="text-gray-500 mr-2 text-lg">TK</span>
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  placeholder="Enter amount"
+                  readOnly
+                  value={selectedMobiles.resellPrice}
+                  className="flex-1 bg-transparent outline-none text-gray-700"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  for="name"
+                  className="block text-xl font-bold text-gray-700 m-1"
+                >
+                  Mobile Number
+                </label>
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  placeholder="Phone Number"
+                  className="input input-bordered w-full"
+                  value={bookingDetails.phoneNumber}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex justify-end gap-4">
+                <Link to="/dashboard/my-order">
+                  <button
+                    onClick={handleBooking}
+                    className="btn bg-blue-500 text-white"
+                  >
+                    Confirm Booking
+                  </button>
+                </Link>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="btn bg-gray-300 hover:bg-gray-400"
+                >
+                  Cancel
                 </button>
-              </Link>
-              <button
-                onClick={() => setShowModal(false)}
-                className="btn bg-gray-300 hover:bg-gray-400"
-              >
-                Cancel
-              </button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       )}
 
       <div>

@@ -19,15 +19,50 @@ const AllCategories = () => {
     phoneNumber: "",
   });
 
+  // useEffect(() => {
+  //   setLoading(true); // Set loading to true before fetching data
+  //   fetch("https://resell-mobile-shop.vercel.app/categories")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCategories(data);
+  //       setLoading(false); // Set loading to false after data is fetched
+  //     })
+  //     .catch(() => setLoading(false)); // Ensure loading is false even on error
+  // }, []);
+
   useEffect(() => {
-    setLoading(true); // Set loading to true before fetching data
-    fetch("https://mobile-store-phi.vercel.app/categories")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Attempt to fetch data from the main server
+        const response = await fetch(
+          "https://resell-mobile-shop.vercel.app/categories"
+        );
+        if (!response.ok) {
+          throw new Error("Server error");
+        }
+        const data = await response.json();
         setCategories(data);
-        setLoading(false); // Set loading to false after data is fetched
-      })
-      .catch(() => setLoading(false)); // Ensure loading is false even on error
+      } catch (error) {
+        console.error("Primary fetch failed, trying fallback:", error);
+        try {
+          // Fetch data from the local JSON file as a fallback
+          const fallbackResponse = await fetch("/categories.json");
+          if (!fallbackResponse.ok) {
+            throw new Error("Fallback fetch failed");
+          }
+          const fallbackData = await fallbackResponse.json();
+          setCategories(fallbackData);
+        } catch (fallbackError) {
+          console.error("Both fetch attempts failed:", fallbackError);
+          toast.error("Failed to load data from both sources.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleViewDetails = (category) => {
@@ -144,7 +179,7 @@ const AllCategories = () => {
       )}
 
       {!selectedCategories && (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  md:gap-3 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3 ">
           {categories.map((category) => (
             <div
               key={category.id}
@@ -157,7 +192,7 @@ const AllCategories = () => {
                     src={category.img}
                     onError={(e) => {
                       e.target.onError = null;
-                      e.target.src = notFoundImg.png
+                      e.target.src = notFoundImg.png;
                     }}
                     alt={category.details ? category.name : ""}
                   />
@@ -167,8 +202,8 @@ const AllCategories = () => {
                 <div className="max-w-xs overflow-hidden text-ellipsis px-2">
                   <h4 className="font-semibold">{category.name}</h4>
 
-                  <p className="truncate">{category.sellerName}</p>
-                  <p className="truncate">{category.location}</p>
+                  <p className="truncate">Seller: {category.sellerName}</p>
+                  <p className="truncate">Location: {category.location}</p>
 
                   <div className="md:flex justify-center items-center xl:gap-3">
                     <p className="font-semibold text-xl line-through text-[#969696]">
@@ -301,7 +336,7 @@ const AllCategories = () => {
               />
             </div>
             <div className="flex justify-end gap-4">
-              <Link to="/orders">
+              <Link to="/dashboard/my-order">
                 <button
                   onClick={handleBooking}
                   className="btn bg-blue-500 text-white"

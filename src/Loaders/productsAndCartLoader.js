@@ -2,13 +2,12 @@
 
 // export const productsAndCartLoader = async () => {
 //   // Fetch all products and men products data
-//   const mobilesData = await fetch("https://mobile-store-phi.vercel.app/mobile");
-//   const laptopsData = await fetch("https://mobile-store-phi.vercel.app/laptop");
-//   const tvsData = await fetch("https://mobile-store-phi.vercel.app/tv");
+//   const mobilesData = await fetch("https://resell-mobile-shop.vercel.app/mobile");
+//   const laptopsData = await fetch("https://resell-mobile-shop.vercel.app/laptop");
+//   const tvsData = await fetch("https://resell-mobile-shop.vercel.app/tv");
 //   const allCategoryData = await fetch(
-//     "https://mobile-store-phi.vercel.app/all-category"
+//     "https://resell-mobile-shop.vercel.app/all-category"
 //   );
-
 
 //   // Parse the JSON data
 //   const mobiles = await mobilesData.json();
@@ -42,10 +41,10 @@ export const productsAndCartLoader = async () => {
   try {
     // Fetch data for all categories
     const [mobilesRes, laptopsRes, tvsRes, allCategoryRes] = await Promise.all([
-      fetch("https://mobile-store-phi.vercel.app/mobile"),
-      fetch("https://mobile-store-phi.vercel.app/laptop"),
-      fetch("https://mobile-store-phi.vercel.app/tv"),
-      fetch("https://mobile-store-phi.vercel.app/categories"),
+      fetch("https://resell-mobile-shop.vercel.app/mobile"),
+      fetch("https://resell-mobile-shop.vercel.app/laptop"),
+      fetch("https://resell-mobile-shop.vercel.app/tv"),
+      fetch("https://resell-mobile-shop.vercel.app/categories"),
     ]);
 
     // Parse JSON responses

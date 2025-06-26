@@ -23,9 +23,6 @@ import ManageProduct from "../../Pages/Dashboard/ManageProduct/ManageProduct";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 
-
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,12 +40,12 @@ const router = createBrowserRouter([
         path: "/mobile",
         element: <Mobile></Mobile>,
       },
-      
+
       {
         path: "/laptop",
         element: <Laptop></Laptop>,
       },
-     
+
       {
         path: "/tv",
         element: <Tv></Tv>,
@@ -79,43 +76,74 @@ const router = createBrowserRouter([
       },
       {
         path: "/orders",
-        loader: productsAndCartLoader ,
-        element: <PrivateRoute><Orders/></PrivateRoute>,
+        loader: productsAndCartLoader,
+        element: (
+          <PrivateRoute>
+            <Orders />
+          </PrivateRoute>
+        ),
       },
     ],
-
-    
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute> ,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
-        {
+      {
         path: "/dashboard",
-        element: <PrivateRoute><MyOrder /></PrivateRoute> ,
+        element: (
+          <PrivateRoute>
+            <MyOrder />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/my-order",
-        element: <PrivateRoute><MyOrder/></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyOrder />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/payment/:id",
-        loader: productsAndCartLoader,
-        // ({params}) => fetch(`https://mobile-store-phi.vercel.app/bookings/${params.id}`)
-        element: <PrivateRoute><Payment/></PrivateRoute>,
+        loader: ({ params }) =>
+          fetch(`https://resell-mobile-shop.vercel.app/bookings/${params.id}`),
+
+        element: (
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        ),
       },
-    
+
       {
         path: "/dashboard/all-users",
-        element:  <AdminRoute><AllUsers/></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/manage-product",
-        element: <PrivateRoute><ManageProduct /></PrivateRoute> ,
+        element: (
+          <PrivateRoute>
+            <ManageProduct />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/add-product",
-        element: <PrivateRoute><AddProduct /></PrivateRoute> ,
+        element: (
+          <PrivateRoute>
+            <AddProduct />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -124,6 +152,5 @@ const router = createBrowserRouter([
     path: "*",
     element: <NotFound />,
   },
-  
 ]);
 export default router;
