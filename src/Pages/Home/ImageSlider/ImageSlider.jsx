@@ -19,7 +19,7 @@ const ImageSlider = () => {
       
         "https://mobilebuzzbd.com/wp-content/uploads/2025/05/Untitled-2.jpg",
         "https://www.applegadgetsbd.com/_next/image?url=https%3A%2F%2Fadminapi.applegadgetsbd.com%2Fstorage%2Fmedia%2Flarge%2FMacBook-Air-M4-13-Inch-1621.jpg&w=1920&q=75",
-        "https://sumashtechbucket.s3.ap-south-1.amazonaws.com/images/web/slider/iPhone-16-Series.webp",
+        "https://www.startech.com.bd/image/cache/catalog/home/banner/2025/tv-deal-banner-982x500.webp",
         "https://mobilebuzzbd.com/wp-content/uploads/2025/06/01-2-1536x839.jpg",
         
     ];
