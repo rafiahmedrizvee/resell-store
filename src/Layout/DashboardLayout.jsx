@@ -8,78 +8,87 @@ import { AuthContext } from "../Context/AuthProvider";
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+
   return (
-    <div>
-      <Header></Header>
+    <div className="min-h-screen flex flex-col">
+      <Header />
 
-      <div className="drawer md:drawer-open ">
-        <input
-          id="dashboard-drawer"
-          type="checkbox"
-          className="drawer-toggle"
-        />
-        <div className="drawer-content ">
-          {/* Page content here */}
+      <div className="flex flex-1">
+        <div className=" drawer md:drawer-open w-full">
+          <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
 
-          <div className="p-12">
-            <Outlet></Outlet>
+          {/* Main Content */}
+          <div className="drawer-content flex flex-col">
+            {/* Mobile Toggle Button */}
+            <label
+              htmlFor="dashboard-drawer"
+              className="btn btn-outline btn-primary drawer-button lg:hidden m-4"
+            >
+              ☰ Menu
+            </label>
+
+            <div className="flex-1 p-4 md:p-6 lg:p-10">
+              <Outlet />
+            </div>
           </div>
-        </div>
-        <div className="drawer-side ">
-          <label
-            htmlFor="dashboard-drawer"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <ul className="menu bg-base-200 gap-5  text-base-content min-h-full w-80 p-4">
-            {/* Sidebar content here */}
 
-            <li className=" hover:bg-primary rounded-lg hover:text-white font-semibold border-1">
-              <NavLink
-                to="/dashboard/my-order"
-                className="font-semibold text-xl "
-              >
-                <p className="  ">My Orders </p>
-              </NavLink>
-            </li>
-            {/* {
-            isAdmin && ( */}
-              <>
-                <li className="hover:bg-primary rounded-lg hover:text-white font-semibold border-1  ">
-                  <NavLink
-                    to="/dashboard/all-users"
-                    className="font-semibold text-xl  "
-                  >
-                    <p className=" ">All Users</p>
-                  </NavLink>
-                </li>
-                <li className="hover:bg-primary rounded-lg hover:text-white font-semibold border-1  ">
-                  <NavLink
-                    to="/dashboard/manage-product"
-                    className="font-semibold text-xl  "
-                  >
-                    <p className=" ">Manage Product</p>
-                  </NavLink>
-                </li>
-                <li className="hover:bg-primary rounded-lg hover:text-white font-semibold border-1  ">
-                  <NavLink
-                    to="/dashboard/add-product"
-                    className="font-semibold text-xl  "
-                  >
-                    <p className=" ">Add Product</p>
-                  </NavLink>
-                </li>
-              </>
-          
-            {/* <li className="hover:bg-primary rounded-lg hover:text-white font-semibold border-1  ">
-              <NavLink
-                to="/dashboard/add-date"
-                className="font-semibold text-xl  "
-              >
-                <p className=" ">Add Date</p>
-              </NavLink>
-            </li> */}
-          </ul>
+          {/* Sidebar */}
+          <div className="drawer-side">
+            <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+            <ul className="menu bg-base-200 text-base-content min-h-full w-72 p-4 space-y-4">
+              {/* User Routes */}
+              <li>
+                <NavLink
+                  to="/dashboard/my-order"
+                  className={({ isActive }) =>
+                    `text-lg font-medium px-3 py-2 rounded-lg
+                    ${isActive ? "bg-primary text-white" : "hover:bg-primary hover:text-white"}`
+                  }
+                >
+                  My Orders
+                </NavLink>
+              </li>
+
+              {/* Admin Routes */}
+              {/* {isAdmin && ( */}
+                <>
+                  <li>
+                    <NavLink
+                      to="/dashboard/all-users"
+                      className={({ isActive }) =>
+                        `text-lg font-medium px-3 py-2 rounded-lg
+                        ${isActive ? "bg-primary text-white" : "hover:bg-primary hover:text-white"}`
+                      }
+                    >
+                      All Users
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/manage-product"
+                      className={({ isActive }) =>
+                        `text-lg font-medium px-3 py-2 rounded-lg
+                        ${isActive ? "bg-primary text-white" : "hover:bg-primary hover:text-white"}`
+                      }
+                    >
+                      Manage Product
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/add-product"
+                      className={({ isActive }) =>
+                        `text-lg font-medium px-3 py-2 rounded-lg
+                        ${isActive ? "bg-primary text-white" : "hover:bg-primary hover:text-white"}`
+                      }
+                    >
+                      Add Product
+                    </NavLink>
+                  </li>
+                </>
+              {/* )} */}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
